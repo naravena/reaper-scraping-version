@@ -39,5 +39,5 @@ jobs:
           *Versión anterior:* ${{ vars.PREVIOUS_STATUS }}
           *Versión actual:* ${{ env.CURRENT_STATUS }}
           '''
-        run: echo "${{ vars.PREVIOUS_STATUS }} ${{ env.CURRENT_STATUS }}"
+        run: echo "${{ vars.PREVIOUS_STATUS }}\n${{ env.CURRENT_STATUS }}"
         #run: python scripts/send_whatsapp_message.py  # Asegúrate de que esta ruta sea correcta en relación con tu repositorio
