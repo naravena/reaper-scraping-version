@@ -26,11 +26,12 @@ jobs:
         run: python scripts/core.py
 
       - name: test
-        run: echo steps.scraping.outputs.result
+        run: echo ${{ steps.scraping.outputs.message }}
 
       - name: test
-        run: echo steps.scraping.outputs
-
+        run: echo ${{ steps.scraping.outputs }}
+      - name: test
+        run: echo ${{ steps.scraping }}
       # Añade un paso para enviar el mensaje de WhatsApp
       - name: Send WhatsApp message
         if: steps.scraping.outputs.result == 'true'
