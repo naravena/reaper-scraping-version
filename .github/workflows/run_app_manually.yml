@@ -26,7 +26,6 @@ jobs:
         run:
           echo "CURRENT_STATUS=$(python scripts/core.py)" >> $GITHUB_ENV
 
-      # Añade un paso para enviar el mensaje de WhatsApp
       - name: Send WhatsApp message
         if: '${{ vars.PREVIOUS_STATUS }}' != '${{ env.CURRENT_STATUS }}'
         env:
