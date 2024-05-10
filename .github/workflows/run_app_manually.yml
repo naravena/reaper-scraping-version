@@ -2,6 +2,9 @@ name: Run Web Scraping Manually
 
 on:
   workflow_dispatch: # Permitir ejecución manual desde la interfaz de GitHub
+  push:
+    branches:
+      - 'master'
 
 jobs:
   run_scraping_manually:
@@ -34,5 +37,5 @@ jobs:
           TWILIO_AUTH_TOKEN: ${{ secrets.TWILIO_AUTH_TOKEN }}
           TWILIO_PHONE_NUMBER: ${{ secrets.TWILIO_PHONE_NUMBER }}
           WHATSAPP_PHONE_NUMBER: ${{ secrets.WHATSAPP_PHONE_NUMBER }}
-          MESSAGE: ${{ steps.scraping.outputs.message }}
+          MESSAGE: 'La version ha cambiado ---> ${{ env.CURRENT_STATUS }}'
         run: python scripts/send_whatsapp_message.py  # Asegúrate de que esta ruta sea correcta en relación con tu repositorio
