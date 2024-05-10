@@ -1,0 +1,30 @@
+name: Send WhatsApp Message
+
+on:
+  push:
+    branches:
+      - main  # Ejecutar cuando se realice un push en la rama main
+
+jobs:
+  send_message:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.x'
+
+      - name: Install dependencies
+        run: pip install twilio
+
+      - name: Send WhatsApp message
+        env:
+          TWILIO_ACCOUNT_SID: ${{ secrets.TWILIO_ACCOUNT_SID }}
+          TWILIO_AUTH_TOKEN: ${{ secrets.TWILIO_AUTH_TOKEN }}
+          WHATSAPP_PHONE_NUMBER: ${{ secrets.WHATSAPP_PHONE_NUMBER }}
+          MESSAGE: ${{ steps.scraping.outputs.message }} ?? 'test test'
+        run: python send_whatsapp_message.py
