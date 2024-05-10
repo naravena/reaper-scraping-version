@@ -5,7 +5,7 @@ import os
 # Variables globales
 URL = "https://www.reaper.fm/download.php"
 CSS_SELECTOR = "div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div.downloadinfo"
-STATE_FILE = "previous_state.txt"
+STATE_FILE = "../previous_state.txt"
 NO_STATE_MESSAGE = "No hay estado anterior registrado."
 NO_ELEMENT_MESSAGE = "No se encontró ningún elemento con el selector CSS especificado."
 CHANGE_MESSAGE = "¡La versión se ha actualizado!"
