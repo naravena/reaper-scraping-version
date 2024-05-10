@@ -1,0 +1,8 @@
+name: Run Web Scraping Unattended
+
+on:
+  schedule:
+    - cron: '0 20,8 * * *'  # Ejecutar a las 8 PM y a las 8 AM, hora de España
+
+import:
+  - path: .github/common_steps.yml
