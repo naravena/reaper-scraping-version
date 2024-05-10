@@ -26,10 +26,6 @@ jobs:
         id: scraping
         run: python scripts/core.py
 
-      - name: test
-        id: asxaasca
-        run: echo ${{ steps.scraping.outputs.message }}
-
       # Añade un paso para enviar el mensaje de WhatsApp
       - name: Send WhatsApp message
         if: contains(steps.scraping.outputs.stdout, '¡La versión se ha actualizado!')
