@@ -21,6 +21,8 @@ jobs:
 
       - name: Run web scraping script
         id: scraping
+        env:
+          PREVIOUS_STATUS: ${{ vars.PREVIOUS_STATUS }}
         run: python scripts/core.py
 
       # Añade un paso para enviar el mensaje de WhatsApp
