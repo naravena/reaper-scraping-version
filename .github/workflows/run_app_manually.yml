@@ -3,5 +3,34 @@ name: Run Web Scraping Manually
 on:
   workflow_dispatch: # Permitir ejecución manual desde la interfaz de GitHub
 
-import:
-    - path: .github/common_steps.yml
+jobs:
+  run_scraping_manually:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.x'
+
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+
+      - name: Run web scraping script
+        id: scraping
+        run: python core.py
+
+      - name: Send WhatsApp message if version updated
+        if: steps.scraping.outputs.stdout == '¡La versión se ha actualizado!'
+        uses: 403-html/whatsapp-action@v2
+        with:
+          twilio_account_sid: ${{ secrets.TWILIO_ACCOUNT_SID }}
+          twilio_auth_token: ${{ secrets.TWILIO_AUTH_TOKEN }}
+          twilio_from_number: ${{ secrets.TWILIO_PHONE_NUMBER }}
+          to: "whatsapp:${{ secrets.WHATSAPP_PHONE_NUMBER }}"
+          body: ${{ steps.scraping.outputs.message }}
