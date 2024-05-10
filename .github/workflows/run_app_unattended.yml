@@ -26,35 +26,13 @@ jobs:
         id: scraping
         run: python core.py
 
-      - name: Send WhatsApp message if version updated
-        if: steps.scraping.outputs.stdout == '¡La versión se ha actualizado!'
-        run: |
-                  python - <<EOF
-                  from twilio.rest import Client
-                  
-                  # Configuración de la cuenta de Twilio
-                  account_sid = '${{ secrets.TWILIO_ACCOUNT_SID }}'
-                  auth_token = '${{ secrets.TWILIO_AUTH_TOKEN }}'
-                  twilio_phone_number = '${{ secrets.TWILIO_PHONE_NUMBER }}'
-        
-                  # Configuración del número de teléfono de destino
-                  whatsapp_phone_number = 'whatsapp:${{ secrets.WHATSAPP_PHONE_NUMBER }}'  # Número de teléfono de prueba de WhatsApp de Twilio
-        
-                  # Mensaje que quieres enviar
-                  mensaje = "${MESSAGE}"
-        
-                  # Crear el cliente de Twilio
-                  client = Client(account_sid, auth_token)
-        
-                  try:
-                      # Enviar el mensaje de WhatsApp
-                      message = client.messages.create(
-                                                        body=mensaje,
-                                                        from_=twilio_phone_number,
-                                                        to=whatsapp_phone_number
-                                                    )
-        
-                      print("Mensaje enviado correctamente a:", message.to)
-                  except Exception as e:
-                      print("Se produjo un error al enviar el mensaje:", str(e))
-                  EOF
+      # Añade un paso para enviar el mensaje de WhatsApp
+      - name: Send WhatsApp message
+        if: ${{ steps.scraping.outputs.stdout == '¡La versión se ha actualizado!' }}
+        env:
+          TWILIO_ACCOUNT_SID: ${{ secrets.TWILIO_ACCOUNT_SID }}
+          TWILIO_AUTH_TOKEN: ${{ secrets.TWILIO_AUTH_TOKEN }}
+          TWILIO_PHONE_NUMBER: ${{ secrets.TWILIO_PHONE_NUMBER }}
+          WHATSAPP_PHONE_NUMBER: ${{ secrets.WHATSAPP_PHONE_NUMBER }}
+          MESSAGE: ${{ steps.scraping.outputs.message }}
+        run: python send_whatsapp_message.py  # Asegúrate de que esta ruta sea correcta en relación con tu repositorio
