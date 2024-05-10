@@ -20,4 +20,4 @@ jobs:
           TWILIO_PHONE_NUMBER: ${{ secrets.TWILIO_PHONE_NUMBER }}
           WHATSAPP_PHONE_NUMBER: ${{ secrets.WHATSAPP_PHONE_NUMBER }}
           MESSAGE: ${{ steps.random_message.outputs.message }}
-        run: python send_whatsapp_message.py  # Asegúrate de que esta ruta sea correcta en relación con tu repositorio
+        run: python ../../send_whatsapp_message.py  # Asegúrate de que esta ruta sea correcta en relación con tu repositorio
