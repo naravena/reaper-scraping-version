@@ -27,6 +27,7 @@ jobs:
         run: python scripts/core.py
 
       - name: test
+        id: asxaasca
         run: echo ${{ steps.scraping.outputs.message }}
 
       # Añade un paso para enviar el mensaje de WhatsApp
