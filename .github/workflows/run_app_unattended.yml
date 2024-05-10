@@ -28,7 +28,7 @@ jobs:
 
       # Añade un paso para enviar el mensaje de WhatsApp
       - name: Send WhatsApp message
-        if: ${{ steps.scraping.outputs.stdout == '¡La versión se ha actualizado!' }}
+        if: contains(steps.scraping.outputs.stdout, '¡La versión se ha actualizado!')
         env:
           TWILIO_ACCOUNT_SID: ${{ secrets.TWILIO_ACCOUNT_SID }}
           TWILIO_AUTH_TOKEN: ${{ secrets.TWILIO_AUTH_TOKEN }}

@@ -1,5 +1,7 @@
-from utils import get_page_content, extract_text, load_previous_state, save_current_state, URL, CSS_SELECTOR, \
-    STATE_FILE, NO_STATE_MESSAGE, CHANGE_MESSAGE, NO_ELEMENT_MESSAGE
+import os
+
+from utils import get_page_content, extract_text, CSS_SELECTOR, URL, CHANGE_MESSAGE, NO_STATE_MESSAGE, \
+    NO_ELEMENT_MESSAGE
 
 
 def check_version():
@@ -11,20 +13,20 @@ def check_version():
             # Extraer el texto del elemento
             current_state = extract_text(html_content, CSS_SELECTOR)
             if current_state:
-                # Cargar el estado anterior
-                previous_state = load_previous_state(STATE_FILE)
+                # Obtener el estado anterior de la variable de entorno
+                previous_state = os.getenv("PREVIOUS_STATUS")
 
                 # Comparar el estado actual con el estado anterior
-                if previous_state and current_state:
+                if previous_state:
                     if current_state != previous_state:
-                        # Guardar el estado actual para futuras comparaciones
-                        save_current_state(STATE_FILE, current_state)
+                        # Guardar el estado actual en la variable de entorno
+                        os.environ["PREVIOUS_STATUS"] = current_state
                         return CHANGE_MESSAGE, current_state
                     else:
                         return "El texto sigue siendo el mismo.", current_state
-                elif current_state:
-                    # Si no hay estado anterior, guardar el estado actual para futuras comparaciones
-                    save_current_state(STATE_FILE, current_state)
+                else:
+                    # Si no hay estado anterior, guardar el estado actual en la variable de entorno
+                    os.environ["PREVIOUS_STATUS"] = current_state
                     return NO_STATE_MESSAGE, current_state
             else:
                 raise Exception(NO_ELEMENT_MESSAGE)
@@ -32,10 +34,3 @@ def check_version():
             raise Exception("Error al obtener el contenido de la página web.")
     except Exception as e:
         return "Se produjo un error: " + str(e), None
-
-
-# Ejemplo de uso
-mensaje, estado_actual = check_version()
-print(mensaje)  # Imprime el mensaje correspondiente
-if estado_actual:
-    print("Estado actual:", estado_actual)
