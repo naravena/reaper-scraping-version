@@ -5,8 +5,7 @@ on:
     - cron: '0 20,8 * * *'  # Ejecutar a las 8 PM y a las 8 AM, hora de España
 
 jobs:
-  run_scraping_unattended:
-
+  run_scraping_manually:
     runs-on: ubuntu-latest
 
     steps:
@@ -19,20 +18,22 @@ jobs:
           python-version: '3.x'
 
       - name: Install dependencies
-        run: |
-          pip install -r requirements.txt
+        run: pip install -r requirements.txt
 
       - name: Run web scraping script
         id: scraping
-        run: python scripts/core.py
+        env:
+          PREVIOUS_STATUS: ${{ vars.PREVIOUS_STATUS }}
+        run:
+          echo "CURRENT_STATUS=$(python scripts/core.py)" >> $GITHUB_ENV
 
       # Añade un paso para enviar el mensaje de WhatsApp
       - name: Send WhatsApp message
-        if: contains(steps.scraping.outputs.stdout, '¡La versión se ha actualizado!')
+        if: ${{ vars.PREVIOUS_STATUS }} =! ${{ env.CURRENT_STATUS }}
         env:
           TWILIO_ACCOUNT_SID: ${{ secrets.TWILIO_ACCOUNT_SID }}
           TWILIO_AUTH_TOKEN: ${{ secrets.TWILIO_AUTH_TOKEN }}
           TWILIO_PHONE_NUMBER: ${{ secrets.TWILIO_PHONE_NUMBER }}
           WHATSAPP_PHONE_NUMBER: ${{ secrets.WHATSAPP_PHONE_NUMBER }}
           MESSAGE: ${{ steps.scraping.outputs.message }}
-        run: python send_whatsapp_message.py  # Asegúrate de que esta ruta sea correcta en relación con tu repositorio
+        run: python scripts/send_whatsapp_message.py  # Asegúrate de que esta ruta sea correcta en relación con tu repositorio

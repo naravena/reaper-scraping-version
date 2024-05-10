@@ -23,21 +23,16 @@ jobs:
         id: scraping
         env:
           PREVIOUS_STATUS: ${{ vars.PREVIOUS_STATUS }}
-        run: |
-          output=$(python scripts/core.py)
-          if [[ $output ]]; then
-            echo "El resultado es True"
-          else
-            echo "El resultado es False"
-          fi
-          echo "SCRIPT_OUTPUT=$output" >> $GITHUB_ENV
+        run:
+          echo "CURRENT_STATUS=$(python scripts/core.py)" >> $GITHUB_ENV
+
       # Añade un paso para enviar el mensaje de WhatsApp
       - name: Send WhatsApp message
-        if: ${{ env.SCRIPT_OUTPUT }}
+        if: ${{ vars.PREVIOUS_STATUS }} =! ${{ env.CURRENT_STATUS }}
         env:
           TWILIO_ACCOUNT_SID: ${{ secrets.TWILIO_ACCOUNT_SID }}
           TWILIO_AUTH_TOKEN: ${{ secrets.TWILIO_AUTH_TOKEN }}
           TWILIO_PHONE_NUMBER: ${{ secrets.TWILIO_PHONE_NUMBER }}
           WHATSAPP_PHONE_NUMBER: ${{ secrets.WHATSAPP_PHONE_NUMBER }}
           MESSAGE: ${{ steps.scraping.outputs.message }}
-        run: python send_whatsapp_message.py  # Asegúrate de que esta ruta sea correcta en relación con tu repositorio
+        run: python scripts/send_whatsapp_message.py  # Asegúrate de que esta ruta sea correcta en relación con tu repositorio
