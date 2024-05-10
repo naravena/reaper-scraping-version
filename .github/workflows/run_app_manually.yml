@@ -24,11 +24,12 @@ jobs:
         env:
           PREVIOUS_STATUS: ${{ vars.PREVIOUS_STATUS }}
         run: |
-          echo "IS_EQUAL=$(python scripts/core.py)" >> $GITHUB_ENV
-          echo ${{ env.IS_EQUAL }}
+          result=$(python scripts/core.py)
+          echo "::set-output name=IS_EQUAL::$result"
+          echo ${{ steps.scraping.outputs.IS_EQUAL }}
 
       - name: Send WhatsApp message
-        if: ${{ env.IS_EQUAL }} == '¡La versión se ha actualizado!'
+        if: ${{ steps.scraping.outputs.IS_EQUAL }}" == '¡La versión se ha actualizado!'
         env:
           TWILIO_ACCOUNT_SID: ${{ secrets.TWILIO_ACCOUNT_SID }}
           TWILIO_AUTH_TOKEN: ${{ secrets.TWILIO_AUTH_TOKEN }}
