@@ -30,7 +30,6 @@ jobs:
           else
             echo "El resultado es False"
           fi
-          output=$(python scripts/core.py)
           echo "::set-output name=output::$output"
       # Añade un paso para enviar el mensaje de WhatsApp
       - name: Send WhatsApp message
