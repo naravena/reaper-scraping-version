@@ -1,29 +1,17 @@
 import os
+from utils import get_page_content, extract_text, URL, CSS_SELECTOR
 
-from utils import get_page_content, extract_text, URL, CSS_SELECTOR, CHANGE_MESSAGE, NO_ELEMENT_MESSAGE
-
-
-def check_version():
-    try:
-        # Obtener el contenido de la página web
-        html_content = get_page_content(URL)
-
-        if html_content:
-            # Extraer el texto del elemento
-            current_state = extract_text(html_content, CSS_SELECTOR)
+if __name__ == "__main__":
+    def check_status():
+        try:
+            current_state = extract_text(get_page_content(URL), CSS_SELECTOR)
             previous_state = os.environ['PREVIOUS_STATUS']
-
-            if previous_state and current_state:
-                if current_state != previous_state:
-                    return True
-                else:
-                    return False
+            if current_state != previous_state:
+                return True
             else:
-                raise Exception(NO_ELEMENT_MESSAGE)
-        else:
-            raise Exception("Error al obtener el contenido de la página web.")
-    except Exception as e:
-        raise f"Se produjo un error: {str(e)}"
+                return False
+        except Exception as e:
+            raise f"Se produjo un error: {str(e)}"
 
 
-check_version()
+    print(check_status())

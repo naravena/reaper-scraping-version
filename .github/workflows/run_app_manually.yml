@@ -23,18 +23,16 @@ jobs:
         id: scraping
         env:
           PREVIOUS_STATUS: ${{ vars.PREVIOUS_STATUS }}
-        run: python scripts/core.py
-
-      - name: test
-        run: echo ${{ steps.scraping.outputs.message }}
-
-      - name: test
-        run: echo ${{ steps.scraping.outputs }}
-      - name: test
-        run: echo ${{ steps.scraping }}
+        run: |
+          output=$(python scripts/core.py)
+          if [[ $output ]]; then
+            echo "El resultado es True"
+          else
+            echo "El resultado es False"
+          fi
       # Añade un paso para enviar el mensaje de WhatsApp
       - name: Send WhatsApp message
-        if: steps.scraping.outputs.result == 'true'
+        if: $output
         env:
           TWILIO_ACCOUNT_SID: ${{ secrets.TWILIO_ACCOUNT_SID }}
           TWILIO_AUTH_TOKEN: ${{ secrets.TWILIO_AUTH_TOKEN }}
