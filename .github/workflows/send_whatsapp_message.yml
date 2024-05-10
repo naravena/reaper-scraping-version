@@ -10,7 +10,8 @@ jobs:
     steps:
       - name: Generate random message
         id: random_message
-        run: echo "::set-output name=message::$(python -c "import random; messages = ['¡Hola!', '¡Buenos días!', '¿Cómo estás?', '¡Feliz día!']; print(random.choice(messages))")"
+        run: |
+          echo "message=$(python -c 'import random; messages = ["¡Hola!", "¡Buenos días!", "¿Cómo estás?", "¡Feliz día!"]; print(random.choice(messages))')" >> $GITHUB_ENV
       # Añade un paso para enviar el mensaje de WhatsApp
       - name: Send WhatsApp message
         if: ${{ steps.scraping.outputs.stdout == '¡La versión se ha actualizado!' }}
