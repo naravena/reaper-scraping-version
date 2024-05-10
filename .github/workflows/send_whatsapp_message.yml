@@ -19,5 +19,5 @@ jobs:
           TWILIO_AUTH_TOKEN: ${{ secrets.TWILIO_AUTH_TOKEN }}
           TWILIO_PHONE_NUMBER: ${{ secrets.TWILIO_PHONE_NUMBER }}
           WHATSAPP_PHONE_NUMBER: ${{ secrets.WHATSAPP_PHONE_NUMBER }}
-          MESSAGE: ${{ env.RANDOM_MESSAGE }}
+          MESSAGE: ${{ env.message }}
         run: python scripts/send_whatsapp_message.py  # Asegúrate de que esta ruta sea correcta en relación con tu repositorio
