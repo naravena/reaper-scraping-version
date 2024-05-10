@@ -18,5 +18,6 @@ jobs:
           twilio_account_sid: ${{ secrets.TWILIO_ACCOUNT_SID }}
           twilio_auth_token: ${{ secrets.TWILIO_AUTH_TOKEN }}
           twilio_from_number: ${{ secrets.TWILIO_PHONE_NUMBER }}
+          whatsapp_phone_number: ${{ secrets.WHATSAPP_PHONE_NUMBER }}
           to: "whatsapp:${{ secrets.WHATSAPP_PHONE_NUMBER }}"
           body: ${{ steps.random_message.outputs.message }}
