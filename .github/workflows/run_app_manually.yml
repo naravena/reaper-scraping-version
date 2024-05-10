@@ -27,7 +27,7 @@ jobs:
           echo "CURRENT_STATUS=$(python scripts/core.py)" >> $GITHUB_ENV
 
       - name: Send WhatsApp message
-        if: '${{ vars.PREVIOUS_STATUS }}' != '${{ env.CURRENT_STATUS }}'
+        if: ${{ vars.PREVIOUS_STATUS }} != ${{ env.CURRENT_STATUS }}
         env:
           TWILIO_ACCOUNT_SID: ${{ secrets.TWILIO_ACCOUNT_SID }}
           TWILIO_AUTH_TOKEN: ${{ secrets.TWILIO_AUTH_TOKEN }}
