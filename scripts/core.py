@@ -1,15 +1,14 @@
 import os
-import re
 
-from utils import get_page_content, extract_text, URL, CSS_SELECTOR
+from utils import get_page_content, extract_text, URL, CSS_SELECTOR, CHANGE_MESSAGE
 
 
 def comparison():
     if extract_text(get_page_content(URL), CSS_SELECTOR) != os.environ['PREVIOUS_STATUS']:
-        return True
+        return CHANGE_MESSAGE
     else:
-        return False
+        return ""
 
 
 if __name__ == "__main__":
-    comparison()
+    print(comparison())
