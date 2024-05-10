@@ -28,7 +28,7 @@ jobs:
 
       # Añade un paso para enviar el mensaje de WhatsApp
       - name: Send WhatsApp message
-        if: ${{ vars.PREVIOUS_STATUS }} != ${{ env.CURRENT_STATUS }}
+        if: '${{ vars.PREVIOUS_STATUS }}' != '${{ env.CURRENT_STATUS }}'
         env:
           TWILIO_ACCOUNT_SID: ${{ secrets.TWILIO_ACCOUNT_SID }}
           TWILIO_AUTH_TOKEN: ${{ secrets.TWILIO_AUTH_TOKEN }}
@@ -39,5 +39,8 @@ jobs:
           *Versión anterior:* ${{ vars.PREVIOUS_STATUS }}
           *Versión actual:* ${{ env.CURRENT_STATUS }}
           '''
-        run: echo "${{ vars.PREVIOUS_STATUS }}\n${{ env.CURRENT_STATUS }}"
+        run: |
+          echo "${{ vars.PREVIOUS_STATUS }}"
+          echo "${{ env.CURRENT_STATUS }}"
+
         #run: python scripts/send_whatsapp_message.py  # Asegúrate de que esta ruta sea correcta en relación con tu repositorio
