@@ -30,10 +30,10 @@ jobs:
           else
             echo "El resultado es False"
           fi
-          echo "::set-output name=output::$output"
+          echo "SCRIPT_OUTPUT=$output" >> $GITHUB_ENV
       # Añade un paso para enviar el mensaje de WhatsApp
       - name: Send WhatsApp message
-        if: output
+        if: ${{ env.SCRIPT_OUTPUT }}
         env:
           TWILIO_ACCOUNT_SID: ${{ secrets.TWILIO_ACCOUNT_SID }}
           TWILIO_AUTH_TOKEN: ${{ secrets.TWILIO_AUTH_TOKEN }}
