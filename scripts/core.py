@@ -15,17 +15,15 @@ def check_version():
 
             if previous_state and current_state:
                 if current_state != previous_state:
-                    return CHANGE_MESSAGE + ' ' + current_state
+                    return True
                 else:
-                    return f"El texto sigue siendo el mismo: {current_state}"
+                    return False
             else:
                 raise Exception(NO_ELEMENT_MESSAGE)
         else:
             raise Exception("Error al obtener el contenido de la página web.")
     except Exception as e:
-        return f"Se produjo un error: {str(e)}"
-
-    # Ejemplo de uso
+        raise f"Se produjo un error: {str(e)}"
 
 
-result = check_version()
+check_version()
