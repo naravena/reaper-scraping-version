@@ -1,9 +1,7 @@
 name: Send WhatsApp Message
 
 on:
-  push:
-    branches:
-      - main  # Ejecutar cuando se realice un push en la rama main
+  workflow_dispatch: # Permitir ejecución manual desde la interfaz de GitHub
 
 jobs:
   send_message:
