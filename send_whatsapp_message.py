@@ -4,7 +4,7 @@ from twilio.rest import Client
 # Configuración de la cuenta de Twilio
 account_sid = os.environ['TWILIO_ACCOUNT_SID']
 auth_token = os.environ['TWILIO_AUTH_TOKEN']
-twilio_phone_number = 'tu_numero_de_telefono_twilio'
+twilio_phone_number = os.environ['TWILIO_PHONE_NUMBER']
 
 # Configuración del número de teléfono de destino
 whatsapp_phone_number = os.environ['WHATSAPP_PHONE_NUMBER']
