@@ -35,5 +35,9 @@ jobs:
           TWILIO_AUTH_TOKEN: ${{ secrets.TWILIO_AUTH_TOKEN }}
           TWILIO_PHONE_NUMBER: ${{ secrets.TWILIO_PHONE_NUMBER }}
           WHATSAPP_PHONE_NUMBER: ${{ secrets.WHATSAPP_PHONE_NUMBER }}
-          MESSAGE: 'La versión ha cambiado ---> ${{ env.CURRENT_STATUS }}'
+          MESSAGE: '''
+          La versión ha cambiado: 
+          *Versión anterior:* ${{ env.PREVIOUS_STATUS }}
+          *Versión actual:* ${{ env.CURRENT_STATUS }}
+          '''
         run: python scripts/send_whatsapp_message.py  # Asegúrate de que esta ruta sea correcta en relación con tu repositorio
