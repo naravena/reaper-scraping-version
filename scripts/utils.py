@@ -1,6 +1,5 @@
 import requests
 from bs4 import BeautifulSoup
-import os
 
 # Variables globales
 URL = "https://www.reaper.fm/download.php"
