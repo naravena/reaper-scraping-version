@@ -23,11 +23,12 @@ jobs:
         id: scraping
         env:
           PREVIOUS_STATUS: ${{ vars.PREVIOUS_STATUS }}
-        run:
-          echo "CURRENT_STATUS=$(python scripts/core.py)" >> $GITHUB_ENV
+        run: |
+          echo "IS_EQUAL=$(python scripts/core.py)" >> $GITHUB_ENV
+          echo ${{ env.IS_EQUAL }}
 
       - name: Send WhatsApp message
-        if: ${{ vars.PREVIOUS_STATUS }} != ${{ env.CURRENT_STATUS }}
+        if: ${{ env.IS_EQUAL }}
         env:
           TWILIO_ACCOUNT_SID: ${{ secrets.TWILIO_ACCOUNT_SID }}
           TWILIO_AUTH_TOKEN: ${{ secrets.TWILIO_AUTH_TOKEN }}
