@@ -15,7 +15,7 @@ def check_version():
 
             if previous_state and current_state:
                 if current_state != previous_state:
-                    return CHANGE_MESSAGE + current_state
+                    return CHANGE_MESSAGE + ' ' + current_state
                 else:
                     return f"El texto sigue siendo el mismo: {current_state}"
             else:
