@@ -29,4 +29,3 @@ def check_version():
 
 
 result = check_version()
-print(result)
