@@ -40,7 +40,6 @@ def main():
 
 
 if __name__ == "__main__":
-    is_change_version = main()[0]
-    status_message_text = main()[1]
+    main()
     # os.environ['IS_CHANGE_VERSION'] = str(is_change_version)
     # os.environ['STATUS_MESSAGE_TEXT'] = status_message_text
