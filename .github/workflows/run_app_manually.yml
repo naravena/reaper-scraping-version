@@ -27,7 +27,7 @@ jobs:
         env:
           PREVIOUS_STATUS: ${{ vars.PREVIOUS_STATUS }}
         run: |
-          resultado=$(scripts/core.py)
+          resultado=$(python scripts/core.py)
 
       - name: TEST
         run: |           
