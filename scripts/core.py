@@ -41,10 +41,10 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    hola = main()
     env_file = os.getenv('GITHUB_ENV')  # Get the path of the runner file
     # write to the file
     with open(env_file, "a") as env_file:
-        env_file.write(f"IS_CHANGE_VERSION={main()[0]}")
-        env_file.write(f"STATUS_MESSAGE_TEXT={main()[1]}")
+        env_file.write(f"IS_CHANGE_VERSION={hola[0]}")
+        env_file.write(f"STATUS_MESSAGE_TEXT={hola[1]}")
 
