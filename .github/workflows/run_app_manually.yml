@@ -24,24 +24,18 @@ jobs:
         env:
           PREVIOUS_STATUS: ${{ vars.PREVIOUS_STATUS }}
         run: |
-          result=$(python scripts/core.py)
-          echo "::set-output name=IS_EQUAL::$result"
-          echo ${{ steps.scraping.outputs.IS_EQUAL }}
+          python scripts/core.py
 
       - name: Send WhatsApp message
-        if: ${{ steps.scraping.outputs.IS_EQUAL }}" == '¡La versión se ha actualizado!'
+        if: ${IS_CHANGE_VERSION} == 'True'
         env:
           TWILIO_ACCOUNT_SID: ${{ secrets.TWILIO_ACCOUNT_SID }}
           TWILIO_AUTH_TOKEN: ${{ secrets.TWILIO_AUTH_TOKEN }}
           TWILIO_PHONE_NUMBER: ${{ secrets.TWILIO_PHONE_NUMBER }}
           WHATSAPP_PHONE_NUMBER: ${{ secrets.WHATSAPP_PHONE_NUMBER }}
-          MESSAGE: '''
-          La versión ha cambiado: \n
-          *Versión anterior:* ${{ vars.PREVIOUS_STATUS }}
-          *Versión actual:* ${{ env.CURRENT_STATUS }}
-          '''
+          MESSAGE: ${{ STATUS_MESSAGE_TEXT }}
         run: |
           echo "${{ vars.PREVIOUS_STATUS }}"
-          echo "${{ env.CURRENT_STATUS }}"
+          echo "fsvsfgbzdgbgbrvet"
 
         #run: python scripts/send_whatsapp_message.py  # Asegúrate de que esta ruta sea correcta en relación con tu repositorio
