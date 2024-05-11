@@ -31,9 +31,9 @@ jobs:
 
       - name: TEST
         run: |           
-          echo ${{ steps.scraping.outputs }}
-          echo ${{ steps.scraping.outputs }}
-          echo ${{ steps.scraping.outputs }}
+          echo ${{ steps.scraping.outputs.resultado }}
+          echo ${{ steps.scraping.outputs.resultado[0] }}
+          echo ${{ steps.scraping.outputs.resultado[1] }}
 
       - name: Send WhatsApp message
         if: ${{ steps.scraping.outputs[0] }}
