@@ -29,6 +29,7 @@ jobs:
         run: |
           output=$(python scripts/core.py)
           echo $output
+          echo output
 
       - name: TEST
         run: |           
