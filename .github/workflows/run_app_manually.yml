@@ -33,7 +33,7 @@ jobs:
           TWILIO_AUTH_TOKEN: ${{ secrets.TWILIO_AUTH_TOKEN }}
           TWILIO_PHONE_NUMBER: ${{ secrets.TWILIO_PHONE_NUMBER }}
           WHATSAPP_PHONE_NUMBER: ${{ secrets.WHATSAPP_PHONE_NUMBER }}
-          MESSAGE: ${{ STATUS_MESSAGE_TEXT }}
+          MESSAGE: ${STATUS_MESSAGE_TEXT}
         run: |
           echo "${{ vars.PREVIOUS_STATUS }}"
           echo "fsvsfgbzdgbgbrvet"
