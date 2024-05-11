@@ -28,9 +28,13 @@ jobs:
           PREVIOUS_STATUS: ${{ vars.PREVIOUS_STATUS }}
         run: |
           resultado=$(python scripts/core.py)
+          python scripts/core.py
 
       - name: TEST
         run: |           
+          echo ${{ steps.scraping.outputs }}
+          echo ${{ steps.scraping.outputs[0] }}
+          echo ${{ steps.scraping.outputs[1] }}
           echo ${{ steps.scraping.outputs.resultado }}
           echo ${{ steps.scraping.outputs.resultado[0] }}
           echo ${{ steps.scraping.outputs.resultado[1] }}
