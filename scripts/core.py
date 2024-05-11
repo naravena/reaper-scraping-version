@@ -41,5 +41,5 @@ def main():
 
 if __name__ == "__main__":
     is_change_version, status_message_text = main()
-    os.environ['IS_CHANGE_VERSION'] = str(is_change_version)
-    os.environ['STATUS_MESSAGE_TEXT'] = status_message_text
+    # os.environ['IS_CHANGE_VERSION'] = str(is_change_version)
+    # os.environ['STATUS_MESSAGE_TEXT'] = status_message_text
