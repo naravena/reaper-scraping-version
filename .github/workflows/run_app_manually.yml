@@ -28,13 +28,13 @@ jobs:
           PREVIOUS_STATUS: ${{ vars.PREVIOUS_STATUS }}
         run: |
           output=$(python scripts/core.py)
-          echo ${output}
 
       - name: TEST
         run: |           
           echo ${output}
           echo $IS_CHANGE_VERSION
           echo $STATUS_MESSAGE_TEXT
+          ${{ steps.scraping.outputs.output }}
 
       - name: Send WhatsApp message
         if: ${{ steps.scraping.outputs[0] }}
