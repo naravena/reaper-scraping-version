@@ -4,7 +4,7 @@ on:
   workflow_dispatch: # Permitir ejecución manual desde la interfaz de GitHub
   push:
     branches:
-      - main
+      - 'master'
 
 jobs:
   run_scraping_manually:
@@ -30,13 +30,13 @@ jobs:
           python scripts/core.py
 
       - name: Send WhatsApp message
-        if: ${{ steps.scrape.outputs.is_change_version }}
+        if: ${{ steps.scraping.outputs[0] }}
         env:
           TWILIO_ACCOUNT_SID: ${{ secrets.TWILIO_ACCOUNT_SID }}
           TWILIO_AUTH_TOKEN: ${{ secrets.TWILIO_AUTH_TOKEN }}
           TWILIO_PHONE_NUMBER: ${{ secrets.TWILIO_PHONE_NUMBER }}
           WHATSAPP_PHONE_NUMBER: ${{ secrets.WHATSAPP_PHONE_NUMBER }}
-          MESSAGE: ${{ steps.scrape.outputs.status_message_text }}
+          MESSAGE: ${{ steps.scraping.outputs[1] }}
         run: |
           echo "${{ vars.PREVIOUS_STATUS }}"
           echo "fsvsfgbzdgbgbrvet"
