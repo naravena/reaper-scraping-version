@@ -41,6 +41,7 @@ def main():
 
 
 if __name__ == "__main__":
+    main()
     env_file = os.getenv('GITHUB_ENV')  # Get the path of the runner file
     # write to the file
     with open(env_file, "a") as env_file:
