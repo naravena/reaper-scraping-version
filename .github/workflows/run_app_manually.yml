@@ -28,9 +28,9 @@ jobs:
           PREVIOUS_STATUS: ${{ vars.PREVIOUS_STATUS }}
         run: |
           resultado=$(scripts/core.py)
-          echo ${{ resultado }}
-          echo ${{ resultado[0] }}
-          echo ${{ resultado[1] }}
+          echo ${{ steps.scraping.outputs }}
+          echo ${{ steps.scraping.outputs }}
+          echo ${{ steps.scraping.outputs }}
 
       - name: Send WhatsApp message
         if: ${{ steps.scraping.outputs[0] }}
