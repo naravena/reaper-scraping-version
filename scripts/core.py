@@ -24,10 +24,9 @@ def notify_status_change(previous_status, current_status):
 
 
 def main():
-    current_status = get_current_status()
-    is_change_in_version = notify_status_change(PREVIOUS_STATUS, current_status)
-
     try:
+        current_status = get_current_status()
+        is_change_in_version = notify_status_change(PREVIOUS_STATUS, current_status)
         if current_status is not None and is_change_in_version:
             status_message = f'''
             ¡¡¡ Nueva Versión !!!
@@ -35,11 +34,12 @@ def main():
             *Estado actual*: {current_status}
             '''
             return is_change_in_version, status_message
+        else:
+            return False, "No se encontró un cambio en la versión"
     except Exception as e:
         print("Se produjo un error durante la ejecución de main():", e)
-        return False
+        return False, "Error durante la ejecución del script"
 
 
 if __name__ == "__main__":
-    print(main()[0])
-    print(main()[1])
+    main()
