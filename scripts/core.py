@@ -28,15 +28,18 @@ def notify_status_change(previous_status, current_status):
 def main():
     current_status = get_current_status()
     is_change_in_version = notify_status_change(PREVIOUS_STATUS, current_status)
-    if current_status is not None and is_change_in_version:
-        status_message = f'''
-        ¡¡¡ Nueva Versión !!!
-        *Estado anterior*: {PREVIOUS_STATUS}
-        *Estado actual*: {current_status}
-        '''
-        return is_change_in_version, status_message
-    else:
-        raise Exception
+
+    try:
+        if current_status is not None and is_change_in_version:
+            status_message = f'''
+            ¡¡¡ Nueva Versión !!!
+            *Estado anterior*: {PREVIOUS_STATUS}
+            *Estado actual*: {current_status}
+            '''
+            return is_change_in_version, status_message
+    except Exception as e:
+        print("Se produjo un error durante la ejecución de main():", e)
+        return False
 
 
 if __name__ == "__main__":
