@@ -28,15 +28,17 @@ jobs:
           PREVIOUS_STATUS: ${{ vars.PREVIOUS_STATUS }}
         run: |
           python scripts/core.py
+          echo $IS_CHANGE_VERSION
+          echo $STATUS_MESSAGE_TEXT
 
       - name: Send WhatsApp message
-        if: $a == 'True'
+        if: ${{ secrets.TWILIO_ACCOUNT_SID }}
         env:
           TWILIO_ACCOUNT_SID: ${{ secrets.TWILIO_ACCOUNT_SID }}
           TWILIO_AUTH_TOKEN: ${{ secrets.TWILIO_AUTH_TOKEN }}
           TWILIO_PHONE_NUMBER: ${{ secrets.TWILIO_PHONE_NUMBER }}
           WHATSAPP_PHONE_NUMBER: ${{ secrets.WHATSAPP_PHONE_NUMBER }}
-          MESSAGE: $b
+          MESSAGE: ${{ vars.PREVIOUS_STATUS }}
         run: |
           echo "${{ vars.PREVIOUS_STATUS }}"
           echo "fsvsfgbzdgbgbrvet"
