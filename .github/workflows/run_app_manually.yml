@@ -28,8 +28,9 @@ jobs:
           PREVIOUS_STATUS: ${{ vars.PREVIOUS_STATUS }}
         run: |
           python scripts/core.py
-          echo "IS_CHANGE_VERSION=$IS_CHANGE_VERSION" >> $GITHUB_ENV
-          echo "STATUS_MESSAGE_TEXT=$STATUS_MESSAGE_TEXT" >> $GITHUB_ENV
+          echo $IS_CHANGE_VERSION
+          echo ''
+          echo $STATUS_MESSAGE_TEXT
 
       - name: Send WhatsApp message
         if: ${{ vars.PREVIOUS_STATUS }} != ''
