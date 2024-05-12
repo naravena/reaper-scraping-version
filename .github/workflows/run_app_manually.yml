@@ -28,9 +28,9 @@ jobs:
           PREVIOUS_STATUS: ${{ vars.PREVIOUS_STATUS }}
         run: |
           python scripts/core.py
-          echo $IS_CHANGE_VERSION
-          echo ''
-          echo $STATUS_MESSAGE_TEXT
+          echo "${{ env.IS_CHANGE_VERSION }}"
+          echo "\n"
+          echo "${{ env.STATUS_MESSAGE_TEXT }}"
 
       - name: Send WhatsApp message
         if: ${{ vars.PREVIOUS_STATUS }} != ''
