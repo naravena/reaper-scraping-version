@@ -27,10 +27,10 @@ jobs:
         env:
           PREVIOUS_STATUS: ${{ vars.PREVIOUS_STATUS }}
         run: |
-          python -c "import scripts/core; print(scraper.get_previous_status())"
-          python -c "import scripts/core; print(scraper.get_current_status())"
-          python -c "import scripts/core; print(scraper.notify_status_change(scraper.get_previous_status(), scraper.get_current_status()))"
-          python -c "import scripts/core; scraper.show_status(scraper.get_previous_status(), scraper.get_current_status())"
+          python -c "import scripts.core; print(scraper.get_previous_status())"
+          python -c "import scripts.core; print(scraper.get_current_status())"
+          python -c "import scripts.core; print(scraper.notify_status_change(scraper.get_previous_status(), scraper.get_current_status()))"
+          python -c "import scripts.core; scraper.show_status(scraper.get_previous_status(), scraper.get_current_status())"
 
       - name: Send WhatsApp message
         if: ${{ vars.PREVIOUS_STATUS }} != ''
