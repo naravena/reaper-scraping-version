@@ -1,6 +1,6 @@
 from twilio.rest import Client
 
-from utils import MESSAGE, TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN, TWILIO_PHONE_NUMBER, WHATSAPP_PHONE_NUMBER
+from scripts.utils import get_environment_variable
 
 
 class WhatsAppMessageSender:
@@ -27,8 +27,10 @@ class WhatsAppMessageSender:
 # Ejemplo de uso
 if __name__ == "__main__":
     # Crear una instancia de WhatsAppMessageSender
-    whatsapp_sender = WhatsAppMessageSender(TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN, TWILIO_PHONE_NUMBER,
-                                            WHATSAPP_PHONE_NUMBER)
+    whatsapp_sender = WhatsAppMessageSender(get_environment_variable('TWILIO_ACCOUNT_SID'),
+                                            get_environment_variable('TWILIO_AUTH_TOKEN'),
+                                            get_environment_variable('TWILIO_PHONE_NUMBER'),
+                                            get_environment_variable('WHATSAPP_PHONE_NUMBER'))
 
     # Enviar el mensaje
-    whatsapp_sender.send_message(MESSAGE)
+    whatsapp_sender.send_message(get_environment_variable('MESSAGE'))
