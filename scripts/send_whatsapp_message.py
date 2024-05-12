@@ -1,6 +1,6 @@
 from twilio.rest import Client
 
-from scripts.utils import MESSAGE
+from scripts.utils import MESSAGE, TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN, TWILIO_PHONE_NUMBER, WHATSAPP_PHONE_NUMBER
 
 
 class WhatsAppMessageSender:
@@ -23,10 +23,12 @@ class WhatsAppMessageSender:
         except Exception as e:
             print("Se produjo un error al enviar el mensaje:", str(e))
 
+
 # Ejemplo de uso
 if __name__ == "__main__":
     # Crear una instancia de WhatsAppMessageSender
-    whatsapp_sender = WhatsAppMessageSender(TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN, TWILIO_PHONE_NUMBER, WHATSAPP_PHONE_NUMBER)
+    whatsapp_sender = WhatsAppMessageSender(TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN, TWILIO_PHONE_NUMBER,
+                                            WHATSAPP_PHONE_NUMBER)
 
     # Enviar el mensaje
     whatsapp_sender.send_message(MESSAGE)

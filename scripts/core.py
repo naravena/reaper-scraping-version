@@ -2,8 +2,8 @@ import requests
 from bs4 import BeautifulSoup
 
 from scripts.send_whatsapp_message import WhatsAppMessageSender
-from scripts.utils import URL, TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN, TWILIO_PHONE_NUMBER, WHATSAPP_PHONE_NUMBER, \
-    PREVIOUS_STATUS, CSS_SELECTOR
+from scripts.utils import TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN, TWILIO_PHONE_NUMBER, WHATSAPP_PHONE_NUMBER, \
+    PREVIOUS_STATUS, CSS_SELECTOR, URL
 
 
 def get_current_status():
