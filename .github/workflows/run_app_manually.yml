@@ -29,20 +29,14 @@ jobs:
         run: |
           python scripts/core.py
 
-      - name: TEST
-        run: |           
-          echo $a
-          echo $a
-          echo $b
-
       - name: Send WhatsApp message
-        if: ${{ steps.scraping.outputs[0] }}
+        if: $IS_CHANGE_VERSION
         env:
           TWILIO_ACCOUNT_SID: ${{ secrets.TWILIO_ACCOUNT_SID }}
           TWILIO_AUTH_TOKEN: ${{ secrets.TWILIO_AUTH_TOKEN }}
           TWILIO_PHONE_NUMBER: ${{ secrets.TWILIO_PHONE_NUMBER }}
           WHATSAPP_PHONE_NUMBER: ${{ secrets.WHATSAPP_PHONE_NUMBER }}
-          MESSAGE: ${{ steps.scraping.outputs[1] }}
+          MESSAGE: $STATUS_MESSAGE_TEXT
         run: |
           echo "${{ vars.PREVIOUS_STATUS }}"
           echo "fsvsfgbzdgbgbrvet"
