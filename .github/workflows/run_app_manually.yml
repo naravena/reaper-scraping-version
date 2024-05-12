@@ -28,6 +28,8 @@ jobs:
           PREVIOUS_STATUS: ${{ vars.PREVIOUS_STATUS }}
         run: |
           python scripts/core.py
+          echo "IS_CHANGE_VERSION=$IS_CHANGE_VERSION" >> $GITHUB_ENV
+          echo "STATUS_MESSAGE_TEXT=$STATUS_MESSAGE_TEXT" >> $GITHUB_ENV
 
       - name: Send WhatsApp message
         if: ${{ vars.PREVIOUS_STATUS }} != ''
@@ -36,9 +38,9 @@ jobs:
           TWILIO_AUTH_TOKEN: ${{ secrets.TWILIO_AUTH_TOKEN }}
           TWILIO_PHONE_NUMBER: ${{ secrets.TWILIO_PHONE_NUMBER }}
           WHATSAPP_PHONE_NUMBER: ${{ secrets.WHATSAPP_PHONE_NUMBER }}
-          MESSAGE: $STATUS_MESSAGE_TEXT
+          MESSAGE: ${{ env.STATUS_MESSAGE_TEXT }}
         run: |
-          echo "${{ vars.PREVIOUS_STATUS }}"
-          echo "fsvsfgbzdgbgbrvet"
+          echo "${{ env.IS_CHANGE_VERSION }}"
+          echo "${{ env.STATUS_MESSAGE_TEXT }}"
 
         #run: python scripts/send_whatsapp_message.py  # Asegúrate de que esta ruta sea correcta en relación con tu repositorio
