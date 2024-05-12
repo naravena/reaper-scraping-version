@@ -2,9 +2,6 @@ name: Run Web Scraping Manually
 
 on:
   workflow_dispatch: # Permitir ejecución manual desde la interfaz de GitHub
-  push:
-    branches:
-      - 'master'
 
 jobs:
   run_scraping_manually:
