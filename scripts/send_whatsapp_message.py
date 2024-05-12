@@ -1,6 +1,6 @@
 from twilio.rest import Client
 
-from scripts.utils import get_environment_variable
+from utils import get_environment_variable
 
 
 class WhatsAppMessageSender:
