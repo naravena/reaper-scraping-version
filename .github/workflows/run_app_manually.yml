@@ -28,6 +28,7 @@ jobs:
           PREVIOUS_STATUS: ${{ vars.PREVIOUS_STATUS }}
         run: |
           output=$(python scripts/core.py)
+          echo "$output"
           IS_CHANGE_VERSION=$(echo "$output" | cut -d ',' -f1)
           STATUS_MESSAGE_TEXT=$(echo "$output" | cut -d ',' -f2)
           echo "IS_CHANGE_VERSION=${IS_CHANGE_VERSION}" >> $GITHUB_ENV
