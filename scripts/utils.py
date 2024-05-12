@@ -11,4 +11,4 @@ TWILIO_ACCOUNT_SID = os.environ['TWILIO_ACCOUNT_SID']
 TWILIO_AUTH_TOKEN = os.environ['TWILIO_AUTH_TOKEN']
 TWILIO_PHONE_NUMBER = os.environ['TWILIO_PHONE_NUMBER']
 WHATSAPP_PHONE_NUMBER = os.environ['WHATSAPP_PHONE_NUMBER']
-estado = os.environ['MESSAGE'] if os.environ['MESSAGE'] else ""
+MESSAGE = os.environ['MESSAGE']
