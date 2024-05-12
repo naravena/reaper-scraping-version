@@ -30,7 +30,7 @@ jobs:
           python scripts/core.py
 
       - name: Send WhatsApp message
-        if: $IS_CHANGE_VERSION
+        if: $IS_CHANGE_VERSION == 'True'
         env:
           TWILIO_ACCOUNT_SID: ${{ secrets.TWILIO_ACCOUNT_SID }}
           TWILIO_AUTH_TOKEN: ${{ secrets.TWILIO_AUTH_TOKEN }}
