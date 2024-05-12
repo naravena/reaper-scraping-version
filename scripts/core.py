@@ -1,7 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
 
-from send_whatsapp_message import WhatsAppMessageSender
+from whatsapp_app_message_sender import WhatsAppMessageSender
 from utils import get_environment_variable, CSS_SELECTOR, URL
 
 
@@ -28,7 +28,6 @@ def main():
         is_change_in_version = get_environment_variable('PREVIOUS_STATUS') != current_status
         if current_status is not None and is_change_in_version:
             print(status_message(get_environment_variable('PREVIOUS_STATUS'), current_status))
-            # Crear una instancia de WhatsAppMessageSender
             # Crear una instancia de WhatsAppMessageSender
             whatsapp_sender = WhatsAppMessageSender(get_environment_variable('TWILIO_ACCOUNT_SID'),
                                                     get_environment_variable('TWILIO_AUTH_TOKEN'),
