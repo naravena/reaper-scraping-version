@@ -32,5 +32,3 @@ jobs:
           WHATSAPP_PHONE_NUMBER: ${{ secrets.WHATSAPP_PHONE_NUMBER }}
         run: |
           python scripts/core.py
-
-        #run: python scripts/send_whatsapp_message.py  # Asegúrate de que esta ruta sea correcta en relación con tu repositorio
