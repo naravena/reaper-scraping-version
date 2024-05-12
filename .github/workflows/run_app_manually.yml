@@ -26,22 +26,11 @@ jobs:
         id: scraping
         env:
           PREVIOUS_STATUS: ${{ vars.PREVIOUS_STATUS }}
-        run: |
-          python -c "import scripts.core; print(scraper.get_previous_status())"
-          python -c "import scripts.core; print(scraper.get_current_status())"
-          python -c "import scripts.core; print(scraper.notify_status_change(scraper.get_previous_status(), scraper.get_current_status()))"
-          python -c "import scripts.core; scraper.show_status(scraper.get_previous_status(), scraper.get_current_status())"
-
-      - name: Send WhatsApp message
-        if: ${{ vars.PREVIOUS_STATUS }} != ''
-        env:
           TWILIO_ACCOUNT_SID: ${{ secrets.TWILIO_ACCOUNT_SID }}
           TWILIO_AUTH_TOKEN: ${{ secrets.TWILIO_AUTH_TOKEN }}
           TWILIO_PHONE_NUMBER: ${{ secrets.TWILIO_PHONE_NUMBER }}
           WHATSAPP_PHONE_NUMBER: ${{ secrets.WHATSAPP_PHONE_NUMBER }}
-          MESSAGE: ${{ env.STATUS_MESSAGE_TEXT }}
         run: |
-          echo "${{ env.IS_CHANGE_VERSION }}"
-          echo "${{ env.STATUS_MESSAGE_TEXT }}"
+          python scripts/core.py
 
         #run: python scripts/send_whatsapp_message.py  # Asegúrate de que esta ruta sea correcta en relación con tu repositorio

@@ -1,30 +1,32 @@
-import os
-
 from twilio.rest import Client
 
+from scripts.utils import MESSAGE
 
-# Configuración de la cuenta de Twilio
-TWILIO_ACCOUNT_SID = os.environ['TWILIO_ACCOUNT_SID']
-TWILIO_AUTH_TOKEN = os.environ['TWILIO_AUTH_TOKEN']
-TWILIO_PHONE_NUMBER = os.environ['TWILIO_PHONE_NUMBER']
 
-# Configuración del número de teléfono de destino
-WHATSAPP_PHONE_NUMBER = os.environ['WHATSAPP_PHONE_NUMBER']
+class WhatsAppMessageSender:
+    def __init__(self, twilio_account_sid, twilio_auth_token, twilio_phone_number, whatsapp_phone_number):
+        self.twilio_account_sid = twilio_account_sid
+        self.twilio_auth_token = twilio_auth_token
+        self.twilio_phone_number = twilio_phone_number
+        self.whatsapp_phone_number = whatsapp_phone_number
 
-# Mensaje que quieres enviar
-mensaje = os.environ['MESSAGE']
+        self.client = Client(self.twilio_account_sid, self.twilio_auth_token)
 
-# Crear el cliente de Twilio
-client = Client(TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN)
+    def send_message(self, message):
+        try:
+            message = self.client.messages.create(
+                from_=self.twilio_phone_number,
+                body=message,
+                to=self.whatsapp_phone_number
+            )
+            print("Mensaje enviado correctamente a:", message.to)
+        except Exception as e:
+            print("Se produjo un error al enviar el mensaje:", str(e))
 
-try:
-    # Enviar el mensaje de WhatsApp
-    message = client.messages.create(
-        from_=TWILIO_PHONE_NUMBER,
-        body=mensaje,
-        to=WHATSAPP_PHONE_NUMBER
-    )
+# Ejemplo de uso
+if __name__ == "__main__":
+    # Crear una instancia de WhatsAppMessageSender
+    whatsapp_sender = WhatsAppMessageSender(TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN, TWILIO_PHONE_NUMBER, WHATSAPP_PHONE_NUMBER)
 
-    print("Mensaje enviado correctamente a:", message.to)
-except Exception as e:
-    print("Se produjo un error al enviar el mensaje:", str(e))
+    # Enviar el mensaje
+    whatsapp_sender.send_message(MESSAGE)

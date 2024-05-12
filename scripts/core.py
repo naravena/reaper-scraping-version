@@ -1,11 +1,9 @@
-import os
-
 import requests
 from bs4 import BeautifulSoup
 
-URL = "https://www.reaper.fm/download.php"
-CSS_SELECTOR = "div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div.downloadinfo"
-PREVIOUS_STATUS = os.environ['PREVIOUS_STATUS']  # Obtén el estado anterior de una variable
+from scripts.send_whatsapp_message import WhatsAppMessageSender
+from scripts.utils import URL, TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN, TWILIO_PHONE_NUMBER, WHATSAPP_PHONE_NUMBER, \
+    PREVIOUS_STATUS, CSS_SELECTOR
 
 
 def get_current_status():
@@ -17,28 +15,28 @@ def get_current_status():
     return None
 
 
-def notify_status_change(previous_status, current_status):
-    if previous_status != current_status:
-        return True
-    return False
+def status_message(previous_status, current_status):
+    return f'''
+            ¡¡¡ Nueva Versión !!!
+            *Estado anterior*: {previous_status}
+            *Estado actual*: {current_status}
+            '''
 
 
 def main():
     try:
         current_status = get_current_status()
-        is_change_in_version = notify_status_change(PREVIOUS_STATUS, current_status)
+        is_change_in_version = PREVIOUS_STATUS != current_status
         if current_status is not None and is_change_in_version:
-            status_message = f'''
-            ¡¡¡ Nueva Versión !!!
-            *Estado anterior*: {PREVIOUS_STATUS}
-            *Estado actual*: {current_status}
-            '''
-            return is_change_in_version, status_message
+            print(status_message(PREVIOUS_STATUS, current_status))
+            # Crear una instancia de WhatsAppMessageSender
+            whatsapp_sender = WhatsAppMessageSender(TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN, TWILIO_PHONE_NUMBER,
+                                                    WHATSAPP_PHONE_NUMBER)
+            whatsapp_sender.send_message(status_message(PREVIOUS_STATUS, current_status))
         else:
-            return False, "No se encontró un cambio en la versión"
+            print("NO HAY NUEVA VERSION")
     except Exception as e:
         print("Se produjo un error durante la ejecución de main():", e)
-        return False, "Error durante la ejecución del script"
 
 
 if __name__ == "__main__":

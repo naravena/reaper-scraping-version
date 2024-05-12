@@ -1,5 +1,4 @@
-import requests
-from bs4 import BeautifulSoup
+import os
 
 # Variables globales
 URL = "https://www.reaper.fm/download.php"
@@ -7,24 +6,9 @@ CSS_SELECTOR = "div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div.dow
 NO_STATE_MESSAGE = "No hay estado anterior registrado."
 NO_ELEMENT_MESSAGE = "No se encontró ningún elemento con el selector CSS especificado."
 CHANGE_MESSAGE = "¡La versión se ha actualizado!"
-
-
-# Función para obtener el contenido de la página web
-def get_page_content(url):
-    response = requests.get(url)
-    if response.status_code == 200:
-        return response.content
-    else:
-        print("Error al obtener la página:", response.status_code)
-        return None
-
-
-# Función para extraer el texto del elemento con el selector CSS especificado
-def extract_text(html_content, css_selector):
-    soup = BeautifulSoup(html_content, 'html.parser')
-    element = soup.select_one(css_selector)
-    if element:
-        return element.get_text(strip=True)
-    else:
-        print("No se encontró ningún elemento con el selector CSS especificado.")
-        return None
+PREVIOUS_STATUS = os.environ['PREVIOUS_STATUS']  # Obtén el estado anterior de una variable
+TWILIO_ACCOUNT_SID = os.environ['TWILIO_ACCOUNT_SID']
+TWILIO_AUTH_TOKEN = os.environ['TWILIO_AUTH_TOKEN']
+TWILIO_PHONE_NUMBER = os.environ['TWILIO_PHONE_NUMBER']
+WHATSAPP_PHONE_NUMBER = os.environ['WHATSAPP_PHONE_NUMBER']
+MESSAGE = os.environ['MESSAGE']
