@@ -2,7 +2,7 @@ import requests
 from bs4 import BeautifulSoup
 
 from send_whatsapp_message import WhatsAppMessageSender
-from utils import get_environment_variable, CSS_SELECTOR
+from utils import get_environment_variable, CSS_SELECTOR, URL
 
 
 def get_current_status():
