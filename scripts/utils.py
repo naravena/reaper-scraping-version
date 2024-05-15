@@ -23,6 +23,6 @@ WHATSAPP_PHONE_NUMBER = 'WHATSAPP_PHONE_NUMBER'
 MESSAGE = 'MESSAGE'
 
 webs_to_scraping = {
-    'REAPER': [get_environment_variable(REAPER_URL), get_environment_variable(REAPER_PREVIOUS_STATUS)],
-    'OBS': [get_environment_variable(OBS_URL), get_environment_variable(OBS_PREVIOUS_STATUS)]
+    'REAPER': [REAPER_URL, get_environment_variable(REAPER_PREVIOUS_STATUS)],
+    'OBS': [OBS_URL, get_environment_variable(OBS_PREVIOUS_STATUS)]
 }
