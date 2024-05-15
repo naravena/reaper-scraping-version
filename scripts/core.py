@@ -6,8 +6,8 @@ from utils import get_environment_variable, webs_to_scraping, TWILIO_ACCOUNT_SID
     TWILIO_PHONE_NUMBER, WHATSAPP_PHONE_NUMBER
 
 
-def get_current_status(selector):
-    response = requests.get(selector)
+def get_current_status(url, selector):
+    response = requests.get(url)
     soup = BeautifulSoup(response.content, 'html.parser')
     status_element = soup.select_one(selector)
     if status_element:
@@ -35,7 +35,7 @@ def send_message_by_whatsapp(pre_status, post_status):
 def main():
     try:
         for page, (url, status) in webs_to_scraping.items():
-            current_status = get_current_status(url)
+            current_status = get_current_status(url, status)
             is_change_in_version = status != current_status
             if current_status is not None and is_change_in_version:
                 send_message_by_whatsapp(status, current_status)
