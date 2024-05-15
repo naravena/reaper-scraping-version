@@ -2,11 +2,8 @@ from twilio.rest import Client
 
 
 class WhatsAppMessageSender:
-    def __init__(self, twilio_account_sid, twilio_auth_token, twilio_phone_number, whatsapp_phone_number):
-        self.twilio_account_sid = twilio_account_sid
-        self.twilio_auth_token = twilio_auth_token
-        self.twilio_phone_number = twilio_phone_number
-        self.whatsapp_phone_number = whatsapp_phone_number
+    def __init__(self, params):
+        self.twilio_account_sid, self.twilio_auth_token, self.twilio_phone_number, self.whatsapp_phone_number = params
 
         self.client = Client(self.twilio_account_sid, self.twilio_auth_token)
 
