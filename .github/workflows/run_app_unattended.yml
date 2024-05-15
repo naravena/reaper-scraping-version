@@ -23,7 +23,8 @@ jobs:
       - name: Run web scraping script
         id: scraping
         env:
-          PREVIOUS_STATUS: ${{ vars.PREVIOUS_STATUS }}
+          REAPER_PREVIOUS_STATUS: ${{ vars.REAPER_PREVIOUS_STATUS }}
+          OBS_PREVIOUS_STATUS: ${{ vars.OBS_PREVIOUS_STATUS }}
           TWILIO_ACCOUNT_SID: ${{ secrets.TWILIO_ACCOUNT_SID }}
           TWILIO_AUTH_TOKEN: ${{ secrets.TWILIO_AUTH_TOKEN }}
           TWILIO_PHONE_NUMBER: ${{ secrets.TWILIO_PHONE_NUMBER }}
