@@ -1,7 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
 
-from scripts.send_email import send_email_report
+from send_email import send_email_report
 from whatsapp_app_message_sender import WhatsAppMessageSender
 import utils
 
