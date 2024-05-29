@@ -32,7 +32,7 @@ jobs:
         # Required mail subject:
         subject: Github Actions job result
         # Required recipients' addresses:
-        to: naravena@yopmail.com, nico2361993@gmail.com
+        to: naravena@yopmail.com
         # Required sender full name (address can be skipped):
         from: naiccacvfva@dcad.com # <user@example.com>
         # Optional plain body:
