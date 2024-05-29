@@ -1,6 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
 
+from scripts.send_email import send_email_report
 from whatsapp_app_message_sender import WhatsAppMessageSender
 import utils
 
@@ -35,6 +36,9 @@ def main():
             is_change_in_version = status != current_status
             if current_status is not None and is_change_in_version:
                 send_message_by_whatsapp(status, current_status)
+                send_email_report(utils.get_environment_variable('PERSONAL_EMAIL'),
+                                  subject=f"Notificación de nueva version de {page}",
+                                  body=status_message(status, current_status))
             else:
                 print(f"NO HAY NUEVA VERSION PARA {page}")
     except Exception as e:
