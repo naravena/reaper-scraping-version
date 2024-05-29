@@ -2,8 +2,7 @@ import requests
 from bs4 import BeautifulSoup
 
 from whatsapp_app_message_sender import WhatsAppMessageSender
-from utils import get_environment_variable, webs_to_scraping, TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN, \
-    TWILIO_PHONE_NUMBER, WHATSAPP_PHONE_NUMBER, params_to_send_whatsapp_message
+import utils
 
 
 def get_current_status(url, selector):
@@ -24,14 +23,14 @@ def status_message(previous_status, current_status):
 
 
 def send_message_by_whatsapp(pre_status, post_status):
-    whatsapp_sender = WhatsAppMessageSender(params_to_send_whatsapp_message)
+    whatsapp_sender = WhatsAppMessageSender(utils.params_to_send_whatsapp_message)
     print(status_message(pre_status, post_status))
     whatsapp_sender.send_message(status_message(pre_status, post_status))
 
 
 def main():
     try:
-        for page, (url, status, selector) in webs_to_scraping.items():
+        for page, (url, status, selector) in utils.webs_to_scraping.items():
             current_status = get_current_status(url, selector)
             is_change_in_version = status != current_status
             if current_status is not None and is_change_in_version:
