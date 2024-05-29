@@ -20,7 +20,7 @@ def status_message(previous_status, current_status):
             ¡¡¡ Nueva Versión !!!
             *Estado anterior*: {previous_status}
             *Estado actual*: {current_status}
-            '''
+            '''.encode("utf-8")
 
 
 def send_message_by_whatsapp(pre_status, post_status):
