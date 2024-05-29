@@ -1,7 +1,7 @@
 import smtplib
 import ssl
 
-from scripts.utils import get_environment_variable
+from utils import get_environment_variable
 
 
 def send_email_report(to_email, subject="GitHub Email Report", body=""):
