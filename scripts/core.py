@@ -20,7 +20,7 @@ def status_message(previous_status, current_status):
             ¡¡¡ Nueva Versión !!!
             *Estado anterior*: {previous_status}
             *Estado actual*: {current_status}
-            '''.encode("utf-8")
+            '''
 
 
 def send_message_by_whatsapp(pre_status, post_status):
@@ -38,7 +38,7 @@ def main():
                 send_message_by_whatsapp(status, current_status)
                 send_email_report(utils.get_environment_variable('PERSONAL_EMAIL'),
                                   subject=f"Notificación de nueva version de {page}",
-                                  body=status_message(status, current_status))
+                                  body=status_message(status, current_status).encode('ascii', errors='ignore'))
             else:
                 print(f"NO HAY NUEVA VERSION PARA {page}")
     except Exception as e:
