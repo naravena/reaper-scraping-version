@@ -1,6 +1,6 @@
 # Proyecto de Web Scraping con GitHub Actions
 
-Este proyecto consiste en un script de Python que realiza web scraping en la página web [Reaper Download](https://www.reaper.fm/download.php) para monitorear cambios en el texto contenido en un elemento específico y utilizar GitHub Actions para ejecutar automáticamente el script cada 12 horas.
+Este proyecto consiste en un script de Python que realiza web scraping en la página web [Reaper Download](https://www.reaper.fm/download.php) para monitorear cambios en el texto contenido en un elemento específico y utilizar GitHub Actions para ejecutar automáticamente el script cada 12 horas. Ademas de OBS
 
 ## Requisitos
 
